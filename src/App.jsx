@@ -1,23 +1,22 @@
 import { useEffect } from 'react';
 import bgImage3 from './assets/images/bg3.avif';
 import gsap from 'gsap';
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 function App() {
-  useEffect(() => {
-    const { innerHeight } = window;
-    const sectionScroller = gsap.timeline({
-        paused: true,
-        scrollTrigger: {
-            trigger: "section",
-            pin: true,
-            end: `+=${innerHeight * 6}`,
-            scrub: 4
-        }
-    });
-
+  const { innerHeight } = window;
     gsap.registerPlugin(ScrollTrigger);
-
+    
+  useEffect(() => {
+    const sectionScroller = gsap.timeline({
+      paused: true,
+      scrollTrigger: {
+          trigger: "section",
+          pin: true,
+          end: `+=${innerHeight * 6}`,
+          scrub: 4
+      }
+  });
     sectionScroller.to('.square-wrapper', {
         rotate: 90,
         duration: 2,
@@ -622,6 +621,10 @@ function App() {
       stagger: -0.05,
       x:0,
     },"-=2")
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
 
     return (
