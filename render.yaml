@@ -1,1 +1,12 @@
+# Exported from Render on 2024-07-10T05:00:15Z
+services:
+- type: web
+  name: banner-animation
+  runtime: node
+  repo: https://github.com/madeincoder/banner-animation
+  plan: free
+  region: oregon
+  buildCommand: npm install; npm run build
+  startCommand: npm run dev
+version: "1"
 
